@@ -3,10 +3,10 @@ project(NMLA_Lab_1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(googletest-master)
+add_subdirectory(googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(Eigen3 3.3)
 
 add_executable(main.cpp main.cpp)
 target_link_libraries(main.cpp Eigen3::Eigen)

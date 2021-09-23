@@ -4,6 +4,8 @@
 #include "Matrix.cpp"
 
 int main(int argc, char **argv) {
+    system("gnuplot --persist gnuplot_test.txt");
+
     if (argc != 3) {
         std::cerr << "Usage: lab_1 <input filename> <output filename>" << std::endl;
         return 1;

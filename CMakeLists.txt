@@ -8,6 +8,8 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 find_package(Eigen3 3.3)
 
+add_library(lobaev_math Matrix.cpp)
+
 add_executable(main.cpp main.cpp)
 target_link_libraries(main.cpp Eigen3::Eigen)
 

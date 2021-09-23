@@ -116,4 +116,24 @@ namespace Lobaev::Math {
         return buffer[i][j];
     }
 
+    template <class T>
+    void Matrix<T>::swap_rows(size_t row_index1, size_t row_index2) {
+        if (row_index1 >= rows_count() || row_index2 >= rows_count()) {
+            throw "";
+        }
+
+        std::swap(buffer[row_index1], buffer[row_index2]);
+    }
+
+    template <class T>
+    void Matrix<T>::swap_columns(size_t column_index1, size_t column_index2) {
+        if (column_index1 >= columns_count() || column_index2 >= columns_count()) {
+            throw "";
+        }
+
+        for (size_t row_index = 0; row_index < rows_count(); row_index++) {
+            std::swap(buffer[row_index][column_index1], buffer[row_index][column_index2]);
+        }
+    }
+
 }

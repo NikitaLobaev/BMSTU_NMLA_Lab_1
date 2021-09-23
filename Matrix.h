@@ -31,6 +31,10 @@ namespace Lobaev::Math {
         Matrix<T> operator*(const Matrix<T>&) const;
 
         Matrix<T> transpose() const;
+
+        void swap_rows(size_t, size_t);
+
+        void swap_columns(size_t, size_t);
     };
 
 }

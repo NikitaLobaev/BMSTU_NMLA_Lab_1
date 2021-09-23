@@ -12,8 +12,8 @@ TEST(vector, size_ok) {
 
 TEST(vector, empty) {
     ASSERT_ANY_THROW({
-                         Vector<int>(0);
-                     });
+        Vector<int>(0);
+    });
 }
 
 TEST(vector, operator_at_ok) {
@@ -31,8 +31,8 @@ TEST(vector, operator_at_fail) {
     Vector<int> vector(3);
 
     ASSERT_ANY_THROW({
-                         vector(3) = 7;
-                     });
+        vector(3) = 7;
+    });
 }
 
 TEST(vector, operator_at_const_ok) {
@@ -54,8 +54,8 @@ TEST(vector, operator_at_const_fail) {
     const Vector<int> &vector_ref = vector;
 
     ASSERT_ANY_THROW({
-                         vector_ref(3);
-                     });
+        vector_ref(3);
+    });
 }
 
 TEST(vector, operator_equals_1) {
@@ -108,8 +108,8 @@ TEST(vector, multiply_fail) {
     Vector<int> vector1(2), vector2(3);
 
     ASSERT_ANY_THROW({
-                         vector1 * vector2;
-                     });
+        vector1 * vector2;
+    });
 }
 
 TEST(matrix, dimensions_ok) {
@@ -122,11 +122,11 @@ TEST(matrix, dimensions_ok) {
 
 TEST(matrix, dimensions_fail) {
     ASSERT_ANY_THROW({
-                         Matrix<int>(0, 3);
-                     });
+        Matrix<int>(0, 3);
+    });
     ASSERT_ANY_THROW({
-                         Matrix<int>(10, 0);
-                     });
+        Matrix<int>(10, 0);
+    });
 }
 
 TEST(matrix, operator_at_ok) {
@@ -147,11 +147,11 @@ TEST(matrix, operator_at_failed) {
     Matrix<int> matrix(1, 4);
 
     ASSERT_ANY_THROW({
-                         matrix(1, 0) = 10;
-                     });
+        matrix(1, 0) = 10;
+    });
     ASSERT_ANY_THROW({
-                         matrix(0, 4) = 15;
-                     });
+        matrix(0, 4) = 15;
+    });
 }
 
 TEST(matrix, operator_equals_1) {
@@ -208,8 +208,8 @@ TEST(matrix, operator_multiply_vector_fail) {
     Vector<int> vector(2);
 
     ASSERT_ANY_THROW({
-                         matrix * vector;
-                     });
+        matrix * vector;
+    });
 }
 
 TEST(matrix, operator_multiply_matrix_ok) {
@@ -244,8 +244,8 @@ TEST(matrix, operator_multiply_matrix_fail) {
     Matrix<int> matrix1(2, 3), matrix2(2, 3);
 
     ASSERT_ANY_THROW({
-                         matrix1 * matrix2;
-                     });
+        matrix1 * matrix2;
+    });
 }
 
 TEST(matrix, transpose_ok) {
@@ -268,4 +268,84 @@ TEST(matrix, transpose_ok) {
     expected_matrix(2, 1) = 6;
 
     ASSERT_EQ(result_matrix, expected_matrix);
+}
+
+TEST(matrix, swap_rows_ok) {
+    Matrix<int> matrix({
+        {1, 2},
+        {3, 4},
+        {5, 6}
+    });
+
+    matrix.swap_rows(0, 2);
+
+    const Matrix<int> expected_result({
+        {5, 6},
+        {3, 4},
+        {1, 2}
+    });
+
+    ASSERT_EQ(matrix, expected_result);
+}
+
+TEST(matrix, swap_rows_fail_index1) {
+    Matrix<int> matrix({
+        {1, 2},
+        {3, 4},
+        {5, 6}
+    });
+
+    ASSERT_ANY_THROW({
+        matrix.swap_rows(3, 1);
+    });
+}
+
+TEST(matrix, swap_rows_fail_index2) {
+    Matrix<int> matrix({
+        {1, 2},
+        {3, 4},
+        {5, 6}
+    });
+
+    ASSERT_ANY_THROW({
+        matrix.swap_rows(1, 3);
+    });
+}
+
+TEST(matrix, swap_columns_ok) {
+    Matrix<int> matrix({
+        {1, 2, 3},
+        {4, 5, 6}
+    });
+
+    matrix.swap_columns(0, 2);
+
+    const Matrix<int> expected_result({
+        {3, 2, 1},
+        {6, 5, 4}
+    });
+
+    ASSERT_EQ(matrix, expected_result);
+}
+
+TEST(matrix, swap_columns_fail_index1) {
+    Matrix<int> matrix({
+        {1, 2, 3},
+        {4, 5, 6}
+    });
+
+    ASSERT_ANY_THROW({
+        matrix.swap_columns(3, 1);
+    });
+}
+
+TEST(matrix, swap_columns_fail_index2) {
+    Matrix<int> matrix({
+        {1, 2, 3},
+        {4, 5, 6}
+    });
+
+    ASSERT_ANY_THROW({
+        matrix.swap_columns(1, 3);
+    });
 }

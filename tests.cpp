@@ -248,6 +248,16 @@ TEST(matrix, operator_multiply_matrix_fail) {
     });
 }
 
+TEST(matrix, is_square_1_ok) {
+    Matrix<int> matrix(2, 2);
+    ASSERT_TRUE(matrix.is_square());
+}
+
+TEST(matrix, is_square_2_ok) {
+    Matrix<int> matrix(2, 3);
+    ASSERT_FALSE(matrix.is_square());
+}
+
 TEST(matrix, transpose_ok) {
     Matrix<int> matrix(2, 3);
     matrix(0, 0) = 1;

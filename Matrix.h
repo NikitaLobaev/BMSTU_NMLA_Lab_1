@@ -14,10 +14,6 @@ namespace Lobaev::Math {
 
         Matrix(const std::vector<std::vector<T>>&);
 
-        [[nodiscard]] size_t rows_count() const;
-
-        [[nodiscard]] size_t columns_count() const;
-
         T &operator()(size_t, size_t);
 
         const T &operator()(size_t, size_t) const;
@@ -29,6 +25,12 @@ namespace Lobaev::Math {
         Vector<T> operator*(const Vector<T>&) const;
 
         Matrix<T> operator*(const Matrix<T>&) const;
+
+        [[nodiscard]] size_t rows_count() const;
+
+        [[nodiscard]] size_t columns_count() const;
+
+        [[nodiscard]] bool is_square() const;
 
         Matrix<T> transpose() const;
 

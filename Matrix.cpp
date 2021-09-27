@@ -24,6 +24,45 @@ namespace Lobaev::Math {
         buffer = vector;
     }
 
+    template<class T>
+    T &Matrix<T>::operator()(size_t i, size_t j) {
+        if (i >= rows_count() || j >= columns_count()) {
+            throw "";
+        }
+
+        return buffer[i][j];
+    }
+
+    template<class T>
+    const T &Matrix<T>::operator()(size_t i, size_t j) const {
+        if (i >= rows_count() || j >= columns_count()) {
+            throw "";
+        }
+
+        return buffer[i][j];
+    }
+
+    template <class T>
+    bool Matrix<T>::operator==(const Matrix<T> &other) const {
+        if (rows_count() != other.rows_count() || columns_count() != other.columns_count()) {
+            return false;
+        }
+
+        for (size_t i = 0; i < rows_count(); i++) {
+            for (size_t j = 0; j < columns_count(); j++) {
+                if ((*this)(i, j) != other(i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    template <class T>
+    bool Matrix<T>::operator!=(const Matrix<T> &other) const {
+        return !(*this == other);
+    }
+
     template <class T>
     Vector<T> Matrix<T>::operator*(const Vector<T> &vector) const {
         if (columns_count() != vector.size()) {
@@ -57,17 +96,6 @@ namespace Lobaev::Math {
     }
 
     template <class T>
-    Matrix<T> Matrix<T>::transpose() const {
-        Matrix<T> result(columns_count(), rows_count());
-        for (size_t i = 0; i < rows_count(); i++) {
-            for (size_t j = 0; j < columns_count(); j++) {
-                result(j, i) = (*this)(i, j);
-            }
-        }
-        return result;
-    }
-
-    template <class T>
     size_t Matrix<T>::rows_count() const {
         return buffer.size();
     }
@@ -78,42 +106,19 @@ namespace Lobaev::Math {
     }
 
     template <class T>
-    bool Matrix<T>::operator==(const Matrix<T> &other) const {
-        if (rows_count() != other.rows_count() || columns_count() != other.columns_count()) {
-            return false;
-        }
-
-        for (size_t i = 0; i < rows_count(); i++) {
-            for (size_t j = 0; j < columns_count(); j++) {
-                if ((*this)(i, j) != other(i, j)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    bool Matrix<T>::is_square() const {
+        return rows_count() == columns_count();
     }
 
     template <class T>
-    bool Matrix<T>::operator!=(const Matrix<T> &other) const {
-        return !(*this == other);
-    }
-
-    template<class T>
-    T &Matrix<T>::operator()(size_t i, size_t j) {
-        if (i >= rows_count() || j >= columns_count()) {
-            throw "";
+    Matrix<T> Matrix<T>::transpose() const {
+        Matrix<T> result(columns_count(), rows_count());
+        for (size_t i = 0; i < rows_count(); i++) {
+            for (size_t j = 0; j < columns_count(); j++) {
+                result(j, i) = (*this)(i, j);
+            }
         }
-
-        return buffer[i][j];
-    }
-
-    template<class T>
-    const T &Matrix<T>::operator()(size_t i, size_t j) const {
-        if (i >= rows_count() || j >= columns_count()) {
-            throw "";
-        }
-
-        return buffer[i][j];
+        return result;
     }
 
     template <class T>

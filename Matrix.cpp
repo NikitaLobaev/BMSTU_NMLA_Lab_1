@@ -122,7 +122,7 @@ namespace Lobaev::Math {
     }
 
     template <class T>
-    void Matrix<T>::swap_rows(size_t row_index1, size_t row_index2) {
+    void Matrix<T>::swap_rows(const size_t row_index1, const size_t row_index2) {
         if (row_index1 >= rows_count() || row_index2 >= rows_count()) {
             throw "";
         }
@@ -131,7 +131,7 @@ namespace Lobaev::Math {
     }
 
     template <class T>
-    void Matrix<T>::swap_columns(size_t column_index1, size_t column_index2) {
+    void Matrix<T>::swap_columns(const size_t column_index1, const size_t column_index2) {
         if (column_index1 >= columns_count() || column_index2 >= columns_count()) {
             throw "";
         }

@@ -56,7 +56,7 @@ namespace Lobaev::Math {
     }
 
     template<class T>
-    T &Vector<T>::operator()(size_t i) {
+    T &Vector<T>::operator()(const size_t i) {
         if (i >= size()) {
             throw "";
         }
@@ -65,12 +65,21 @@ namespace Lobaev::Math {
     }
 
     template<class T>
-    const T &Vector<T>::operator()(size_t i) const {
+    const T &Vector<T>::operator()(const size_t i) const {
         if (i >= size()) {
             throw "";
         }
 
         return buffer[i];
+    }
+
+    template<class T>
+    void Vector<T>::swap(const size_t index1, const size_t index2) {
+        if (index1 >= size() || index2 >= size()) {
+            throw "";
+        }
+
+        std::swap(buffer[index1], buffer[index2]);
     }
 
 }

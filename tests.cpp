@@ -96,10 +96,11 @@ TEST(vector, multiply_ok) {
     vector2(3) = 2;
     vector2(4) = 1;
 
-    int result = vector1 * vector2;
+    const int result = vector1 * vector2;
 
-    int expected_result = vector1(0) * vector2(0) + vector1(1) * vector2(1) + vector1(2) * vector2(2) +
-                          vector1(3) * vector2(3) + vector1(4) * vector2(4);
+    const int expected_result = vector1(0) * vector2(0) + vector1(1) * vector2(1) +
+                                vector1(2) * vector2(2) + vector1(3) * vector2(3) +
+                                vector1(4) * vector2(4);
 
     ASSERT_EQ(result, expected_result);
 }
@@ -109,6 +110,50 @@ TEST(vector, multiply_fail) {
 
     ASSERT_ANY_THROW({
         vector1 * vector2;
+    });
+}
+
+TEST(vector, swap_ok) {
+    Vector<int> vector({
+        1,
+        9,
+        4,
+        5
+    });
+
+    vector.swap(1, 3);
+
+    const Vector<int> expected_result({
+        1,
+        5,
+        4,
+        9
+    });
+
+    ASSERT_EQ(vector, expected_result);
+}
+
+TEST(vector, swap_index1_fail) {
+    Vector<int> vector({
+        3,
+        6,
+        9
+    });
+
+    ASSERT_ANY_THROW({
+        vector.swap(3, 1);
+    });
+}
+
+TEST(vector, swap_index2_fail) {
+    Vector<int> vector({
+        3,
+        6,
+        9
+    });
+
+    ASSERT_ANY_THROW({
+        vector.swap(1, 3);
     });
 }
 

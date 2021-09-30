@@ -26,6 +26,8 @@ namespace Lobaev::Math {
         bool operator!=(const Vector<T>&) const;
 
         T operator*(const Vector<T>&) const;
+
+        void swap(size_t, size_t);
     };
 
 }

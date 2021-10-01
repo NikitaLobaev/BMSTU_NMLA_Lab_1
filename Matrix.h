@@ -9,6 +9,8 @@ namespace Lobaev::Math {
     class Matrix {
     private:
         std::vector<std::vector<T>> buffer;
+
+        bool is_diagonally_dominant(size_t) const;
     public:
         Matrix(size_t, size_t);
 
@@ -37,6 +39,8 @@ namespace Lobaev::Math {
         void swap_rows(size_t, size_t);
 
         void swap_columns(size_t, size_t);
+
+        bool is_diagonally_dominant() const;
     };
 
 }

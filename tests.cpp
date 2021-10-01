@@ -404,3 +404,53 @@ TEST(matrix, swap_columns_fail_index2) {
         matrix.swap_columns(1, 3);
     });
 }
+
+TEST(matrix, is_diagonally_dominant_1_ok) {
+    const Matrix<int> matrix({
+        {5, 2, 1},
+        {4, 9, 3},
+        {5, 0, 6}
+    });
+
+    ASSERT_TRUE(matrix.is_diagonally_dominant());
+}
+
+TEST(matrix, is_diagonally_dominant_2_ok) {
+    const Matrix<int> matrix({
+        {19, -3, 2, 5, 3},
+        {11, -13, 0, 1, 0},
+        {0, 0, -11, -10, 0},
+        {4, 3, 0, 9, 1},
+        {-3, -2, -5, -1, -14}
+    });
+
+    ASSERT_TRUE(matrix.is_diagonally_dominant());
+}
+
+TEST(matrix, is_diagonally_dominant_3_fail) {
+    const Matrix<int> matrix({
+        {4, 1, 0},
+        {2, 5, 1}
+    });
+
+    ASSERT_FALSE(matrix.is_diagonally_dominant());
+}
+
+TEST(matrix, is_diagonally_dominant_4_fail) {
+    const Matrix<int> matrix({
+        {2, 1},
+        {3, 3}
+    });
+
+    ASSERT_FALSE(matrix.is_diagonally_dominant());
+}
+
+TEST(matrix, is_diagonally_dominant_5_fail) {
+    const Matrix<int> matrix({
+        {-5, 1, -2},
+        {-3, -1, 0},
+        {1, 2, 5}
+    });
+
+    ASSERT_FALSE(matrix.is_diagonally_dominant());
+}

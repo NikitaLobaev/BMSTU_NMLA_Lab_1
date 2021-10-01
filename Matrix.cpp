@@ -141,4 +141,41 @@ namespace Lobaev::Math {
         }
     }
 
+    template <class T>
+    bool Matrix<T>::is_diagonally_dominant(const size_t index) const {
+        T element = (*this)(index, index);
+        if (element < 0) {
+            element = -element;
+        }
+
+        T sum = 0;
+        for (size_t index2 = 0; index2 < columns_count() && sum < element; index2++) {
+            if (index2 == index) {
+                continue;
+            }
+
+            T cur_element = (*this)(index, index2);
+            if (cur_element < 0) {
+                cur_element = -cur_element;
+            }
+
+            sum += cur_element;
+        }
+        return sum < element;
+    }
+
+    template <class T>
+    bool Matrix<T>::is_diagonally_dominant() const {
+        if (!is_square()) {
+            return false;
+        }
+
+        for (size_t index = 0; index < rows_count(); index++) {
+            if (!is_diagonally_dominant(index)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

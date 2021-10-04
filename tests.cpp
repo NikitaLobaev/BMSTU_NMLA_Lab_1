@@ -113,6 +113,120 @@ TEST(vector, multiply_fail) {
     });
 }
 
+TEST(vector, minus_unary_ok) {
+    const Vector<int> vector({
+        -1,
+        2,
+        -3,
+        0
+    });
+
+    const Vector<int> result = -vector;
+
+    const Vector<int> expected_result({
+        1,
+        -2,
+        3,
+        0
+    });
+
+    ASSERT_EQ(result, expected_result);
+}
+
+TEST(vector, plus_ok) {
+    const Vector<int> vector1({
+        -1,
+        2,
+        -3,
+        0,
+        -11
+    });
+
+    const Vector<int> vector2({
+        5,
+        3,
+        -1,
+        9,
+        0
+    });
+
+    const Vector<int> result = vector1 + vector2;
+
+    const Vector<int> expected_result({
+        4,
+        5,
+        -4,
+        9,
+        -11
+    });
+
+    ASSERT_EQ(result, expected_result);
+}
+
+TEST(vector, plus_dimensions_fail) {
+    const Vector<int> vector1({
+        1,
+        2
+    });
+
+    const Vector<int> vector2({
+        3,
+        4,
+        5
+    });
+
+    ASSERT_ANY_THROW({
+        vector1 + vector2;
+    });
+}
+
+TEST(vector, minus_ok) {
+    const Vector<int> vector1({
+        5,
+        2,
+        -1,
+        9,
+        0
+    });
+
+    const Vector<int> vector2({
+        -1,
+        3,
+        -3,
+        0,
+        -11
+    });
+
+    const Vector<int> result = vector1 - vector2;
+
+    const Vector<int> expected_result({
+        6,
+        -1,
+        2,
+        9,
+        11
+    });
+
+    ASSERT_EQ(result, expected_result);
+}
+
+TEST(vector, minus_dimensions_fail) {
+    const Vector<int> vector1({
+        3,
+        4,
+        5
+    });
+
+    const Vector<int> vector2({
+        1,
+        2
+    });
+
+    ASSERT_ANY_THROW({
+        vector1 - vector2;
+    });
+}
+
 TEST(vector, swap_ok) {
     Vector<int> vector({
         1,

@@ -27,6 +27,12 @@ namespace Lobaev::Math {
 
         T operator*(const Vector<T>&) const;
 
+        Vector<T> operator-() const;
+
+        Vector<T> operator+(const Vector<T>&) const;
+
+        Vector<T> operator-(const Vector<T>&) const;
+
         void swap(size_t, size_t);
     };
 

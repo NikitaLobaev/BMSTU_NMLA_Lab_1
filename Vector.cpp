@@ -82,4 +82,31 @@ namespace Lobaev::Math {
         std::swap(buffer[index1], buffer[index2]);
     }
 
+    template<class T>
+    Vector<T> Vector<T>::operator-() const {
+        Vector<T> new_vector(*this);
+        for (size_t index = 0; index < size(); index++) {
+            new_vector(index) = -new_vector(index);
+        }
+        return new_vector;
+    }
+
+    template <class T>
+    Vector<T> Vector<T>::operator+(const Vector<T> &other) const {
+        if (size() != other.size()) {
+            throw "";
+        }
+
+        Vector<T> new_vector(*this);
+        for (size_t index = 0; index < size(); index++) {
+            new_vector(index) += other(index);
+        }
+        return new_vector;
+    }
+
+    template<class T>
+    Vector<T> Vector<T>::operator-(const Vector<T> &other) const {
+        return *this + -other;
+    }
+
 }

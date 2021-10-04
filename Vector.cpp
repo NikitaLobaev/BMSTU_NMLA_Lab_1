@@ -140,4 +140,16 @@ namespace Lobaev::Math {
         return (T2) std::pow(sum, (T2) std::pow(p, -1));
     }
 
+    template <class T>
+    template <class T2>
+    T2 Vector<T>::norm_euclidean() const {
+        return norm<T2>(2);
+    }
+
+    template<class T>
+    template<class T2>
+    T2 Vector<T>::norm_infinite() const {
+        return norm<T2>(0);
+    }
+
 }

@@ -271,7 +271,7 @@ TEST(vector, swap_index2_fail) {
     });
 }
 
-TEST(vector, norm_1_ok) {
+TEST(vector, norm_ok) {
     const Vector<int> vector({
         -1,
         3,
@@ -287,7 +287,7 @@ TEST(vector, norm_1_ok) {
     ASSERT_EQ(norm_1, std::round(expected_norm_1));
 }
 
-TEST(vector, norm_2_ok) {
+TEST(vector, norm_euclidean_ok) {
     const Vector<int> vector({
         -1,
         3,
@@ -297,14 +297,14 @@ TEST(vector, norm_2_ok) {
         2
     });
 
-    const auto norm_2 = vector.norm<double>(2);
+    const auto norm_euclidean = vector.norm_euclidean<double>();
 
-    const double expected_norm_2 = 12;
+    const double expected_norm_euclidean = 12;
 
-    ASSERT_EQ(norm_2, std::round(expected_norm_2));
+    ASSERT_EQ(norm_euclidean, std::round(expected_norm_euclidean));
 }
 
-TEST(vector, norm_3_ok) {
+TEST(vector, norm_infinite_ok) {
     const Vector<int> vector({
         -1,
         3,
@@ -313,7 +313,7 @@ TEST(vector, norm_3_ok) {
         -11
     });
 
-    const auto norm_infinite = vector.norm<double>(0);
+    const auto norm_infinite = vector.norm_infinite<double>();
 
     const double expected_norm_infinite = 3;
 

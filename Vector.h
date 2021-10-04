@@ -37,6 +37,12 @@ namespace Lobaev::Math {
 
         template <class T2>
         T2 norm(size_t) const;
+
+        template <class T2>
+        T2 norm_euclidean() const;
+
+        template <class T2>
+        T2 norm_infinite() const;
     };
 
 }

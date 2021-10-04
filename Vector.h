@@ -34,6 +34,9 @@ namespace Lobaev::Math {
         Vector<T> operator-(const Vector<T>&) const;
 
         void swap(size_t, size_t);
+
+        template <class T2>
+        T2 norm(size_t) const;
     };
 
 }

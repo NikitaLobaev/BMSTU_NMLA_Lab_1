@@ -271,6 +271,55 @@ TEST(vector, swap_index2_fail) {
     });
 }
 
+TEST(vector, norm_1_ok) {
+    const Vector<int> vector({
+        -1,
+        3,
+        -3,
+        0,
+        -11
+    });
+
+    const auto norm_1 = vector.norm<double>(1);
+
+    const double expected_norm_1 = -12;
+
+    ASSERT_EQ(norm_1, std::round(expected_norm_1));
+}
+
+TEST(vector, norm_2_ok) {
+    const Vector<int> vector({
+        -1,
+        3,
+        -3,
+        0,
+        -11,
+        2
+    });
+
+    const auto norm_2 = vector.norm<double>(2);
+
+    const double expected_norm_2 = 12;
+
+    ASSERT_EQ(norm_2, std::round(expected_norm_2));
+}
+
+TEST(vector, norm_3_ok) {
+    const Vector<int> vector({
+        -1,
+        3,
+        0,
+        2,
+        -11
+    });
+
+    const auto norm_infinite = vector.norm<double>(0);
+
+    const double expected_norm_infinite = 3;
+
+    ASSERT_EQ(norm_infinite, std::round(expected_norm_infinite));
+}
+
 TEST(matrix, dimensions_ok) {
     const size_t m = 2, n = 3;
     Matrix<int> matrix(m, n);

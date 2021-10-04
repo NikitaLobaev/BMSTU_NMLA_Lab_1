@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Vector.h"
 
 namespace Lobaev::Math {
@@ -107,6 +108,36 @@ namespace Lobaev::Math {
     template<class T>
     Vector<T> Vector<T>::operator-(const Vector<T> &other) const {
         return *this + -other;
+    }
+
+    /**
+     * @tparam T
+     * @tparam T2 type of returning value, necessary for accounting of the inaccuracy
+     * @param p order of the norm (0 - infinite norm)
+     * @return p-norm of this vector
+     */
+    template <class T>
+    template <class T2>
+    T2 Vector<T>::norm(size_t p) const {
+        if (p == 0) {
+            size_t index_max = 0;
+
+            for (size_t index = 1; index < size(); index++) {
+                if ((*this)(index_max) < (*this)(index)) {
+                    index_max = index;
+                }
+            }
+
+            return (T2) (*this)(index_max);
+        }
+
+        T2 sum = (T2) std::pow((T2) (*this)(0), p); //TODO: возможно, из-за std::pow нельзя будет поддержать кастомные типы T, кроме встроенных
+
+        for (size_t index = 1; index < size(); index++) {
+            sum += (T2) std::pow((T2) (*this)(index), p);
+        }
+
+        return (T2) std::pow(sum, (T2) std::pow(p, -1));
     }
 
 }

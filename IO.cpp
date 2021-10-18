@@ -6,7 +6,7 @@ namespace Lobaev::IO {
     using namespace Lobaev::Math;
 
     template <class T>
-    static Vector<T> read_vector(std::ifstream &input) {
+    static Vector<T> read_vector(std::istream &input) {
         size_t size;
         input >> size;
 
@@ -19,7 +19,7 @@ namespace Lobaev::IO {
     }
 
     template <class T>
-    static Matrix<T> read_matrix(std::ifstream &input) {
+    static Matrix<T> read_matrix(std::istream &input) {
         size_t m, n;
         input >> m >> n;
 
@@ -34,12 +34,12 @@ namespace Lobaev::IO {
     }
 
     template <class T>
-    static void print(std::ofstream &output, const T &t) {
+    static void print(std::ostream &output, const T &t) {
         output << t << std::endl;
     }
 
     template <class T>
-    static void print_vector(std::ofstream &output, const Vector<T> &vector) {
+    static void print_vector(std::ostream &output, const Vector<T> &vector) {
         output << vector.size() << std::endl << vector(0);
         for (size_t i = 1; i < vector.size(); i++) {
             output << ' ' << vector(i);
@@ -48,7 +48,7 @@ namespace Lobaev::IO {
     }
 
     template <class T>
-    static void print_matrix(std::ofstream &output, const Matrix<T> &matrix) {
+    static void print_matrix(std::ostream &output, const Matrix<T> &matrix) {
         output << matrix.rows_count() << ' ' << matrix.columns_count() << std::endl;
         for (size_t i = 0; i < matrix.rows_count(); i++) {
             output << matrix(i, 0);

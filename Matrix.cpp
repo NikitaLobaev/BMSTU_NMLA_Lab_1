@@ -178,4 +178,58 @@ namespace Lobaev::Math {
         return true;
     }
 
+    template <class T>
+    template <class T2>
+    T2 Matrix<T>::norm(size_t p) const {
+        if (!is_square()) {
+            throw "";
+        }
+
+        T2 sum = (T2) 0;
+        for (size_t row_index = 0; row_index < rows_count(); row_index++) {
+            for (size_t column_index = 0; column_index < columns_count(); column_index++) {
+                sum += (T2) std::pow((T2) (*this)(row_index, column_index), p);
+            }
+        }
+
+        return (T2) std::pow(sum, (T2) std::pow(p, -1));
+    }
+
+    template <class T>
+    template <class T2>
+    T2 Matrix<T>::norm_euclidean() const {
+        return norm<T2>(2);
+    }
+
+    template<class T>
+    template<class T2>
+    T2 Matrix<T>::norm_infinite() const {
+        if (!is_square()) {
+            throw "";
+        }
+
+        T2 best_sum = (T2) (*this)(0, 0);
+        for (size_t column_index = 1; column_index < columns_count(); column_index++) {
+            best_sum += (T2) (*this)(0, column_index);
+        }
+
+        for (size_t row_index = 1; row_index < rows_count(); row_index++) {
+            T2 cur_sum = (T2) (*this)(row_index, 0);
+            for (size_t column_index = 1; column_index < columns_count(); column_index++) {
+                T cur_element = (*this)(row_index, column_index);
+                if (cur_element < 0) {
+                    cur_element = -cur_element;
+                }
+
+                cur_sum += (T2) cur_element;
+            }
+
+            if (best_sum < cur_sum) {
+                best_sum = cur_sum;
+            }
+        }
+
+        return best_sum;
+    }
+
 }

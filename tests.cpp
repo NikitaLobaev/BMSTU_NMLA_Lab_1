@@ -599,3 +599,56 @@ TEST(matrix, is_diagonally_dominant_5_fail) {
 
     ASSERT_FALSE(matrix.is_diagonally_dominant());
 }
+
+TEST(matrix, norm_ok) {
+    const Matrix<int> matrix({
+        {0, 1, -2},
+        {6, -7, 8},
+        {3, 4, 5}
+    });
+
+    const auto norm = matrix.template norm<int>(1);
+
+    const int expected_norm = 18;
+
+    ASSERT_EQ(norm, expected_norm);
+}
+
+TEST(matrix, norm_dimensions_fail) {
+    const Matrix<int> matrix({
+        {0, 1, 2},
+        {3, 4, 5}
+    });
+
+    ASSERT_ANY_THROW({
+        matrix.template norm<int>(1);
+    });
+}
+
+TEST(matrix, norm_euclidean_ok) {
+    const Matrix<int> matrix({
+        {-2, -5, -10},
+        {2, 5, -10},
+        {2, 4, 10}
+    });
+
+    const auto norm = matrix.template norm_euclidean<double>();
+
+    const double expected_norm = std::sqrt(378);
+
+    ASSERT_EQ(std::round(norm), std::round(expected_norm));
+}
+
+TEST(matrix, norm_infinite_ok) {
+    const Matrix<int> matrix({
+        {-2, -5, -10},
+        {2, 5, -10},
+        {2, 4, 10}
+    });
+
+    const auto norm_infinite = matrix.norm_infinite<int>();
+
+    const double expected_norm_infinite = 17;
+
+    ASSERT_EQ(norm_infinite, expected_norm_infinite);
+}

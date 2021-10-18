@@ -40,7 +40,16 @@ namespace Lobaev::Math {
 
         void swap_columns(size_t, size_t);
 
-        bool is_diagonally_dominant() const;
+        [[nodiscard]] bool is_diagonally_dominant() const;
+
+        template <class T2>
+        T2 norm(size_t) const;
+
+        template <class T2>
+        T2 norm_euclidean() const;
+
+        template <class T2>
+        T2 norm_infinite() const;
     };
 
 }

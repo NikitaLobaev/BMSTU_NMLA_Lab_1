@@ -40,6 +40,8 @@ namespace Lobaev::Math {
 
         void swap_columns(size_t, size_t);
 
+        Matrix<T> resize(size_t, size_t, size_t, size_t) const;
+
         [[nodiscard]] bool is_diagonally_dominant() const;
 
         template <class T2>

@@ -550,6 +550,40 @@ TEST(matrix, swap_columns_fail_index2) {
     });
 }
 
+TEST(matrix, resize_1_ok) {
+    const Matrix<int> matrix({
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    
+    const Matrix<int> resized_matrix = matrix.resize(1, matrix.rows_count() - 1, 1, matrix.columns_count() + 1);
+    
+    const Matrix<int> expected_resized_matrix({
+        {5, 6, 0}
+    });
+    
+    ASSERT_EQ(resized_matrix, expected_resized_matrix);
+}
+
+TEST(matrix, resize_2_ok) {
+    const Matrix<int> matrix({
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    
+    const Matrix<int> resized_matrix = matrix.resize(1, matrix.rows_count() + 1, 1, matrix.columns_count() - 1);
+    
+    const Matrix<int> expected_resized_matrix({
+        {5},
+        {8},
+        {0}
+    });
+    
+    ASSERT_EQ(resized_matrix, expected_resized_matrix);
+}
+
 TEST(matrix, is_diagonally_dominant_1_ok) {
     const Matrix<int> matrix({
         {5, 2, 1},

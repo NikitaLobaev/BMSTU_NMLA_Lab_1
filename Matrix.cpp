@@ -140,6 +140,27 @@ namespace Lobaev::Math {
             std::swap(buffer[row_index][column_index1], buffer[row_index][column_index2]);
         }
     }
+    
+    template <class T>
+    Matrix<T> Matrix<T>::resize(const size_t rows_from, const size_t rows_to,
+                                const size_t columns_from, const size_t columns_to) const { //[rows_from; rows_to), ...
+        if (rows_from >= rows_to || columns_from >= columns_to) {
+            throw "";
+        }
+        
+        Matrix<T> resized_matrix(rows_to - rows_from, columns_to - columns_from);
+        if (rows_from < rows_count() && columns_from < columns_count()) {
+            const size_t rows_to_ = std::min(rows_to, rows_count());
+            const size_t columns_to_ = std::min(columns_to, columns_count());
+            
+            for (size_t row_index = rows_from; row_index < rows_to_; row_index++) {
+                for (size_t column_index = columns_from; column_index < columns_to_; column_index++) {
+                    resized_matrix(row_index - rows_from, column_index - columns_from) = (*this)(row_index, column_index);
+                }
+            }
+        }
+        return resized_matrix;
+    }
 
     template <class T>
     bool Matrix<T>::is_diagonally_dominant(const size_t index) const {

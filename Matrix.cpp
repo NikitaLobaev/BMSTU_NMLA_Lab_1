@@ -62,6 +62,36 @@ namespace Lobaev::Math {
     bool Matrix<T>::operator!=(const Matrix<T> &other) const {
         return !(*this == other);
     }
+    
+    template <class T>
+    Matrix<T> Matrix<T>::operator+(const Matrix<T> &other) const {
+        if (rows_count() != other.rows_count() || columns_count() != other.columns_count()) {
+            throw "";
+        }
+        
+        Matrix<T> result(rows_count(), columns_count());
+        for (size_t row_index = 0; row_index < rows_count(); row_index++) {
+            for (size_t column_index = 0; column_index < columns_count(); column_index++) {
+                result(row_index, column_index) = (*this)(row_index, column_index) + other(row_index, column_index);
+            }
+        }
+        return result;
+    }
+    
+    template <class T>
+    Matrix<T> Matrix<T>::operator-(const Matrix<T> &other) const {
+        if (rows_count() != other.rows_count() || columns_count() != other.columns_count()) {
+            throw "";
+        }
+        
+        Matrix<T> result(rows_count(), columns_count());
+        for (size_t row_index = 0; row_index < rows_count(); row_index++) {
+            for (size_t column_index = 0; column_index < columns_count(); column_index++) {
+                result(row_index, column_index) = (*this)(row_index, column_index) - other(row_index, column_index);
+            }
+        }
+        return result;
+    }
 
     template <class T>
     Vector<T> Matrix<T>::operator*(const Vector<T> &vector) const {
@@ -252,5 +282,5 @@ namespace Lobaev::Math {
 
         return best_sum;
     }
-
+    
 }

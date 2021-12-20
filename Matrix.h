@@ -23,6 +23,10 @@ namespace Lobaev::Math {
         bool operator==(const Matrix<T>&) const;
 
         bool operator!=(const Matrix<T>&) const;
+    
+        Matrix<T> operator+(const Matrix<T>&) const;
+        
+        Matrix<T> operator-(const Matrix<T>&) const;
 
         Vector<T> operator*(const Vector<T>&) const;
 

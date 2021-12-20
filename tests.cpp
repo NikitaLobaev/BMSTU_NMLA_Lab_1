@@ -384,6 +384,74 @@ TEST(matrix, operator_equals_2) {
     ASSERT_NE(matrix1, matrix2);
 }
 
+TEST(matrix, operator_plus_ok) {
+    const Matrix<int> matrix1({
+        {1, 2},
+        {3, 4}
+    });
+    const Matrix<int> matrix2({
+        {5, 6},
+        {7, 8}
+    });
+    
+    const Matrix<int> result = matrix1 + matrix2;
+    
+    const Matrix<int> expected_result({
+        {6, 8},
+        {10, 12}
+    });
+    
+    ASSERT_EQ(result, expected_result);
+}
+
+TEST(matrix, operator_plus_dimensions_fail) {
+    const Matrix<int> matrix1({
+        {1, 2},
+        {3, 4}
+    });
+    const Matrix<int> matrix2({
+        {5, 6, 7}
+    });
+    
+    ASSERT_ANY_THROW({
+        matrix1 + matrix2;
+    });
+}
+
+TEST(matrix, operator_minus_ok) {
+    const Matrix<int> matrix1({
+        {2, 5},
+        {3, 4}
+    });
+    const Matrix<int> matrix2({
+        {1, 2},
+        {9, 4}
+    });
+    
+    const Matrix<int> result = matrix1 - matrix2;
+    
+    const Matrix<int> expected_result({
+        {1, 3},
+        {-6, 0}
+    });
+    
+    ASSERT_EQ(result, expected_result);
+}
+
+TEST(matrix, operator_minus_dimensions_fail) {
+    const Matrix<int> matrix1({
+        {2, 5},
+        {3, 4}
+    });
+    const Matrix<int> matrix2({
+        {1, 2, 3}
+    });
+    
+    ASSERT_ANY_THROW({
+        matrix1 - matrix2;
+    });
+}
+
 TEST(matrix, operator_multiply_vector_ok) {
     const Matrix<int> matrix({
         {1, 2, 3},
